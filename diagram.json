@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "author": "poubelle-intelligente",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-hc-sr04", "id": "us_niveau", "top": -150, "left": 120, "attrs": { "distance": "40" } },
+    { "type": "wokwi-hc-sr04", "id": "us_main", "top": -150, "left": 330, "attrs": { "distance": "100" } },
+    { "type": "wokwi-servo", "id": "servo1", "top": -100, "left": -200, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": 40, "left": 250, "attrs": { "color": "red" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 110, "left": 250, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 40, "left": 330, "attrs": { "volume": "0.1" } }
+  ],
+  "connections": [
+    ["esp:5", "us_niveau:TRIG", "green", []],
+    ["esp:18", "us_niveau:ECHO", "blue", []],
+    ["esp:5V", "us_niveau:VCC", "red", []],
+    ["esp:GND.2", "us_niveau:GND", "black", []],
+
+    ["esp:19", "us_main:TRIG", "green", []],
+    ["esp:21", "us_main:ECHO", "blue", []],
+    ["esp:5V", "us_main:VCC", "red", []],
+    ["esp:GND.2", "us_main:GND", "black", []],
+
+    ["esp:13", "servo1:PWM", "orange", []],
+    ["esp:5V", "servo1:V+", "red", []],
+    ["esp:GND.1", "servo1:GND", "black", []],
+
+    ["esp:26", "r1:1", "green", []],
+    ["r1:2", "led1:A", "green", []],
+    ["led1:C", "esp:GND.2", "black", []],
+
+    ["esp:27", "bz1:2", "purple", []],
+    ["bz1:1", "esp:GND.2", "black", []]
+  ],
+  "dependencies": {}
+}
